@@ -2,15 +2,15 @@ import { HttpService } from "@nestjs/axios";
 import { Injectable, Logger } from "@nestjs/common";
 import { catchError, firstValueFrom } from "rxjs";
 import { CURRENT_STANDINGS } from "src/http/ergast/endpoints";
-import { DriverStanding } from "./models";
-import { mapStandingsFromSource } from "./utils/mapStandingsFromSource";
+import { DriverStandingResponse } from "./models";
+import { mapDriversStandingsFromSource } from "./utils/mapDriversStandingsFromSource";
 
 @Injectable({})
 export class StandingsService {
   private readonly logger = new Logger(StandingsService.name);
   constructor(private readonly httpService: HttpService) {}
 
-  async getDriversStandingsCurrent(): Promise<DriverStanding[]> {
+  async getDriversStandingsCurrent(): Promise<DriverStandingResponse> {
     const { data } = await firstValueFrom(
       this.httpService.get<string>(CURRENT_STANDINGS).pipe(
         catchError((error) => {
@@ -20,6 +20,6 @@ export class StandingsService {
       ),
     );
 
-    return mapStandingsFromSource(data)
+    return mapDriversStandingsFromSource(data)
   }
 }

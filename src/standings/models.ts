@@ -19,3 +19,9 @@ export interface DriverStanding {
     nationality: string
   }
 }
+
+export interface DriverStandingResponse {
+  season: string
+  round: number
+  standings: DriverStanding[]
+}
