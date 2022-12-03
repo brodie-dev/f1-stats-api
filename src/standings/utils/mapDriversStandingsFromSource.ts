@@ -11,8 +11,8 @@ export const mapDriversStandingsFromSource = (source: string): DriverStandingRes
     round: Number(MRData.StandingsTable.StandingsList["@_round"]),
     standings: MRData.StandingsTable.StandingsList.DriverStanding.map((standing) => ({
       position: Number(standing["@_position"]),
-      points: Number(standing["@_position"]),
-      wins: Number(standing["@_position"]),
+      points: Number(standing["@_points"]),
+      wins: Number(standing["@_wins"]),
       driver: {
         id: standing.Driver["@_driverId"],
         code: standing.Driver["@_code"],
