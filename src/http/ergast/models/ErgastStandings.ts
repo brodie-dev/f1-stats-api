@@ -28,8 +28,8 @@ interface ErgastStanding {
 
 export interface ErgastStandings {
   StandingsTable: {
-    StandingsList: {
-      "@_season": string
+    "@_season": string
+    StandingsList?: {
       "@_round": string
       DriverStanding: ErgastStanding[]
     }
