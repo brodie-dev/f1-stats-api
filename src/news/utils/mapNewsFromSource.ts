@@ -6,16 +6,21 @@ const sortNews = (a: NewsItem, b: NewsItem) =>
 
 export const mapSeasonsFromSource = (source: MediaStackNewsResponse): NewsResponse => {
   const news = source.data
-    .filter(item => !!item.image)
-    .map((item) => ({
-      author: item.author,
-      title: item.title,
-      description: item.description,
-      url: item.url,
-      source: item.source,
-      image: item.image,
-      publishDate: item.published_at,
-    }))
+    .reduce((acc, item) => {
+      if (item.image) {
+        acc.push({
+          author: item.author,
+          title: item.title,
+          description: item.description,
+          url: item.url,
+          source: item.source,
+          image: item.image,
+          publishDate: item.published_at,
+        })
+      }
+
+      return acc
+    }, [] as NewsItem[])
     .sort(sortNews)
 
   return {
